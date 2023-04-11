@@ -1,27 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Movement : MonoBehaviour
 {
     private string characterName = "Dexter";
     private Vector3 characterSize = new Vector3(x: 1, y: 1, z: 1);
-    [SerializeField] private float speed = 2f;
-    [SerializeField] private Vector3 movementDirection = new Vector3(x: 0, y: 0, z: 1);
-    private Vector3 CalculateDisplacement(float movSpeed, Vector3 movDirection)
-    {
-        var displacement = movSpeed * Time.deltaTime * movDirection;
-        return displacement;
-    }
+    [SerializeField] private float movementSpeed = 2f;
+    [SerializeField] private float rotationSpeed = 720;
 
-    private void Move(float movSpeed, Vector3 movDirection, Transform movObject)
+    private void Move(float movSpeed, float rotSpeed)
     {
-        movObject.position += CalculateDisplacement(movSpeed, movDirection);
+        var direction = new Vector3(x: Input.GetAxis("Horizontal"), y: 0, z: Input.GetAxis("Vertical"));
+
+        transform.Translate(movSpeed * Time.deltaTime * direction, Space.World);
+
+        if (direction != Vector3.zero)
+        {
+        Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotSpeed * Time.deltaTime);
+        }
     }
 
     private void Awake()
     {
-        var isSpeedValid = speed > 0;
+        var isSpeedValid = movementSpeed > 0;
         var isNameValid = !string.IsNullOrEmpty(characterName);
 
         Debug.Assert(isSpeedValid, "The speed is invalid");
@@ -33,9 +37,8 @@ public class Movement : MonoBehaviour
         transform.localScale = characterSize;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Move(speed, movementDirection, transform);
+        Move(movementSpeed, rotationSpeed);
     }
 }
