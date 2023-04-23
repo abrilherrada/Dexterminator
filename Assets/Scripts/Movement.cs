@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
     private string characterName = "Dexter";
     private Vector3 characterSize = new Vector3(x: 1, y: 1, z: 1);
     [SerializeField] private float movementSpeed = 2f;
-    [SerializeField] private float rotationSpeed = 720;
+    [SerializeField] private float rotationSpeed = 360;
 
     private void Move(float movSpeed, float rotSpeed)
     {
@@ -18,8 +18,8 @@ public class Movement : MonoBehaviour
 
         if (direction != Vector3.zero)
         {
-        Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotSpeed * Time.deltaTime);
+        Quaternion rotation = Quaternion.LookRotation(direction.normalized);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotSpeed * Time.deltaTime);
         }
     }
 
