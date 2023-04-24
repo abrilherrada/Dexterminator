@@ -11,10 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-  - Wall
-  - 
-  - 
-  - 
+  - StaticCollitions
+  - Player
+  - Enemy
+  - Projectile
   - 
   - 
   - 
