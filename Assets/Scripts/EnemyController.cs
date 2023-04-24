@@ -4,31 +4,44 @@ using UnityEngine;
 
 public enum EnemyTypes
 {
-    Lookout,
-    Chaser
+    Ant,
+    Tick
 }
 
-public class Enemies : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     [SerializeField] private EnemyTypes enemyType;
     [SerializeField] private Transform target;
     [SerializeField] private float distanceToStop = 2;
     [SerializeField] private float movementSpeed = 1;
     [SerializeField] private float rotationSpeed = 60;
+    [SerializeField] private float health = 100;
 
     private void SetEnemyAction(EnemyTypes enemyType, Vector3 direction)
     {
         switch(enemyType)
         {
-            case EnemyTypes.Lookout:
+            case EnemyTypes.Ant:
                 Look(direction.normalized);
                 break;
-            case EnemyTypes.Chaser:
+            case EnemyTypes.Tick:
                 Chase(direction);
                 break;
             default:
                 break;
         }
+    }
+
+    private float SetDamageTaken(EnemyTypes enemyType)
+    {
+        switch (enemyType) 
+        {
+            case EnemyTypes.Ant:
+                return 34;
+            case EnemyTypes.Tick:
+                return 50;
+        }
+        return 0;
     }
 
     private void Look(Vector3 direction)
@@ -52,15 +65,36 @@ public class Enemies : MonoBehaviour
         }
     }
 
+    private void TakeDamage(float damagePoints)
+    {
+        if (health - damagePoints < 0)
+        {
+            health = 0;
+        }
+        else
+        {
+            health -= damagePoints;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            TakeDamage(SetDamageTaken(enemyType));
+            Debug.Log(health);
+        }
+    }
+
     private void Awake()
     {
-        if (gameObject.name == "Enemy 1")
+        if (gameObject.name == "Ant")
         {
-            enemyType = EnemyTypes.Lookout;
+            enemyType = EnemyTypes.Ant;
         }
-        else if (gameObject.name == "Enemy 2")
+        else if (gameObject.name == "Tick")
         {
-            enemyType = EnemyTypes.Chaser;
+            enemyType = EnemyTypes.Tick;
         }
     }
 
@@ -69,5 +103,10 @@ public class Enemies : MonoBehaviour
         var distanceToTarget = target.position - transform.position;
 
         SetEnemyAction(enemyType, distanceToTarget);
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
