@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class BallShooter : MonoBehaviour
 {
-    [SerializeField] private KeyCode leftShootKey = KeyCode.J;
-    [SerializeField] private KeyCode doubleShootKey = KeyCode.K;
-    [SerializeField] private KeyCode rightShootKey = KeyCode.L;
+    [SerializeField] private KeyCode shootKey = KeyCode.L;
 
     [SerializeField] private Ball ballToShoot;
     [SerializeField] private Transform shootingPoint1;
     [SerializeField] private Transform shootingPoint2;
 
-    [SerializeField] private float timeToShoot = 1f;
+    [SerializeField] private float timeToShoot = 0.5f;
     private float timeLeftToShoot;
 
     private void Shoot(Transform shootingPoint)
@@ -22,21 +20,10 @@ public class BallShooter : MonoBehaviour
     }
     private void Inputs()
     {
-        if (timeLeftToShoot <= 0)
+        if (timeLeftToShoot <= 0 && Input.GetKeyDown(shootKey))
         {
-            if (Input.GetKeyDown(leftShootKey))
-            {
-                Shoot(shootingPoint1);
-            }
-            if (Input.GetKeyDown(doubleShootKey))
-            {
-                Shoot(shootingPoint1);
-                Shoot(shootingPoint2);
-            }
-            if (Input.GetKeyDown(rightShootKey))
-            {
-                Shoot(shootingPoint2);
-            }
+            Shoot(shootingPoint1);
+            Shoot(shootingPoint2);
         }
     }
 
