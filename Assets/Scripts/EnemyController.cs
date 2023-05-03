@@ -67,9 +67,9 @@ public class EnemyController : MonoBehaviour
 
     private void TakeDamage(float damagePoints)
     {
-        if (health - damagePoints < 0)
+        if (health - damagePoints <= 0)
         {
-            health = 0;
+            Destroy(gameObject);
         }
         else
         {
@@ -103,10 +103,5 @@ public class EnemyController : MonoBehaviour
         var distanceToTarget = target.position - transform.position;
 
         SetEnemyAction(enemyType, distanceToTarget);
-
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
     }
 }
