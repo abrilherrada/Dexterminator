@@ -5,7 +5,8 @@ using UnityEngine;
 public enum EnemyTypes
 {
     Ant,
-    Tick
+    Spider1,
+    Spider2
 }
 
 public class EnemyController : MonoBehaviour
@@ -24,7 +25,7 @@ public class EnemyController : MonoBehaviour
             case EnemyTypes.Ant:
                 Look(direction.normalized);
                 break;
-            case EnemyTypes.Tick:
+            case EnemyTypes.Spider1:
                 Chase(direction);
                 break;
             default:
@@ -38,7 +39,7 @@ public class EnemyController : MonoBehaviour
         {
             case EnemyTypes.Ant:
                 return 34;
-            case EnemyTypes.Tick:
+            case EnemyTypes.Spider1:
                 return 50;
         }
         return 0;
@@ -92,9 +93,9 @@ public class EnemyController : MonoBehaviour
         {
             enemyType = EnemyTypes.Ant;
         }
-        else if (gameObject.name == "Tick")
+        else if (gameObject.name == "Spider 1")
         {
-            enemyType = EnemyTypes.Tick;
+            enemyType = EnemyTypes.Spider1;
         }
     }
 
