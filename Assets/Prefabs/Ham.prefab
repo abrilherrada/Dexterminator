@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2125331383631730638}
   - component: {fileID: 2125331383631730636}
   - component: {fileID: 2125331383631730637}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ham1/4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,9 @@ GameObject:
   - component: {fileID: 2125331383829711306}
   - component: {fileID: 2125331383829711307}
   - component: {fileID: 2125331383829711308}
-  m_Layer: 0
+  - component: {fileID: 1712597077983806156}
+  - component: {fileID: 2125331384405644969}
+  m_Layer: 10
   m_Name: Ham
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,9 +111,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2125331383829711309}
-  m_LocalRotation: {x: 0.70105743, y: -0.09229586, z: -0.70105743, w: -0.09229586}
-  m_LocalPosition: {x: -0.06800003, y: 0.06543988, z: -0.0038547516}
-  m_LocalScale: {x: 0.8, y: 0.8000001, z: 0.80000013}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: -0.7071068, w: 0}
+  m_LocalPosition: {x: -0.06800003, y: 0.09, z: -0.0038547516}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2125331384807655199}
@@ -120,7 +122,7 @@ Transform:
   - {fileID: 2125331383631730638}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 195, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 90, z: 0}
 --- !u!33 &2125331383829711306
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -183,6 +185,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3abfc7198c85ce649bd21dd41e50b870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allConsumed: 0
+--- !u!136 &1712597077983806156
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125331383829711309}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.086100444
+  m_Height: 0.31548277
+  m_Direction: 2
+  m_Center: {x: -0.0019908508, y: -0.0066952314, z: -0.0319818}
+--- !u!114 &2125331384405644969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125331383829711309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a032c512029f8f4390c5b181a473c9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  consumer: {fileID: 2125331383829711308}
+  healingPoints: 10
 --- !u!1 &2125331384780908769
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +225,7 @@ GameObject:
   - component: {fileID: 2125331384780908768}
   - component: {fileID: 2125331384780908782}
   - component: {fileID: 2125331384780908783}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ham3/4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +308,7 @@ GameObject:
   - component: {fileID: 2125331384807655199}
   - component: {fileID: 2125331384807655197}
   - component: {fileID: 2125331384807655198}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ham4/4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +391,7 @@ GameObject:
   - component: {fileID: 2125331384970443653}
   - component: {fileID: 2125331384970443651}
   - component: {fileID: 2125331384970443652}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ham2/4
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Consumer : MonoBehaviour
 {
+    private GameObject[] portions;
+    private int currentIndex;
+    public bool allConsumed;
 
-    GameObject[] portions;
-    int currentIndex;
-    float lastChange;
-    float interval = 1f;
 
-    void Start()
+    private void Start()
     {
         bool skipFirst = transform.childCount > 4;
         portions = new GameObject[skipFirst ? transform.childCount-1 : transform.childCount];
@@ -20,27 +19,28 @@ public class Consumer : MonoBehaviour
             if (portions[i].activeInHierarchy)
                 currentIndex = i;
         }
+        allConsumed = false;
     }
 
-    void Update()
+     public void Consume()
     {
-        if (Time.time - lastChange > interval)
+        if (allConsumed)
         {
-            Consume();
-            lastChange = Time.time;
+            return;
+        }
+        if (currentIndex == portions.Length - 1)
+        {
+            portions[currentIndex].SetActive(false);
+            currentIndex++;
+            allConsumed = true;
+            return;
+        }
+
+        if (currentIndex < portions.Length - 1)
+        {
+            portions[currentIndex].SetActive(false);
+            currentIndex++;
+            portions[currentIndex].SetActive(true);
         }
     }
-
-    void Consume()
-    {
-        if (currentIndex != portions.Length)
-            portions[currentIndex].SetActive(false);
-        currentIndex++;
-        if (currentIndex > portions.Length)
-            currentIndex = 0;
-        else if (currentIndex == portions.Length)
-            return;
-        portions[currentIndex].SetActive(true);
-    }
-
 }
