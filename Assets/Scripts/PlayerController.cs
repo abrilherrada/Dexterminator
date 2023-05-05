@@ -80,13 +80,21 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damagePoints)
     {
-        if (health - damagePoints < 0)
+        health -= damagePoints;
+        animator.SetTrigger("isTakingDamage");
+
+        if (health - damagePoints <= 0)
         {
             health = 0;
+            animator.SetInteger("health", 0);
         }
-        else
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Rock"))
         {
-            health -= damagePoints;
+            TakeDamage(10f);
         }
     }
 
