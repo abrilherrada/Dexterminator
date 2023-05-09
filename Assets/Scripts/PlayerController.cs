@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private Rigidbody playerRigidbody;
     [SerializeField] private Animator animator;
     [SerializeField] private KeyCode jumpKey = KeyCode.K;
     [SerializeField] private KeyCode spinKey = KeyCode.J;
@@ -15,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float health = 100;
     private float maxHealth = 100;
 
-
+    [SerializeField] private float jumpingForce = 15f;
     [SerializeField] private float movementSpeed = 2f;
     [SerializeField] private float rotationSpeed = 360;
 
@@ -53,6 +54,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(jumpKey))
         {
+            Vector3 forceVector = transform.up * jumpingForce;
+            playerRigidbody.AddForce(forceVector, ForceMode.Impulse);
             animator.SetTrigger("isJumping");
         }
     }
