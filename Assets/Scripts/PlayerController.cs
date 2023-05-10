@@ -20,6 +20,31 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float movementSpeed = 2f;
     [SerializeField] private float rotationSpeed = 360;
 
+    [SerializeField] private Transform raycastOrigin;
+    [SerializeField] private float raycastMaxDistance = 0.1f;
+    [SerializeField] private LayerMask raycastLayers;
+
+    private bool IsOnGround()
+    {
+        bool isHitting = Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, raycastMaxDistance, raycastLayers);
+
+        if (isHitting)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    //Borrar:
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(raycastOrigin.position, raycastOrigin.position + raycastOrigin.forward * raycastMaxDistance);
+    }
+
     //Movement
     private void Move(float movSpeed, float rotSpeed)
     {
@@ -52,7 +77,7 @@ public class PlayerController : MonoBehaviour
     //Abilities
     private void Jump()
     {
-        if (Input.GetKeyDown(jumpKey))
+        if (Input.GetKeyDown(jumpKey) && IsOnGround())
         {
             Vector3 forceVector = transform.up * jumpingForce;
             playerRigidbody.AddForce(forceVector, ForceMode.Impulse);

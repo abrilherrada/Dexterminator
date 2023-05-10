@@ -8,7 +8,6 @@ public class Consumer : MonoBehaviour
     private int currentIndex;
     public bool allConsumed;
 
-
     private void Start()
     {
         bool skipFirst = transform.childCount > 4;
@@ -28,6 +27,7 @@ public class Consumer : MonoBehaviour
         {
             return;
         }
+
         if (currentIndex == portions.Length - 1)
         {
             portions[currentIndex].SetActive(false);
