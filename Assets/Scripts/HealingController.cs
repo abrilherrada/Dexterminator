@@ -9,6 +9,7 @@ public class HealingController : MonoBehaviour
     [SerializeField] private float healingPoints = 10;
     private float lastChange;
     private float interval = 0.5f;
+    private int pointsForCollecting = 5;
 
     private void OnCollisionStay(Collision collision)
     {
@@ -19,8 +20,10 @@ public class HealingController : MonoBehaviour
           
             if (consumer.allConsumed)
             {
+                GameManager.Instance.AddScore(pointsForCollecting);
                 player.GetHealed(healingPoints);
                 healingPoints = 0;
+                pointsForCollecting = 0;
             }
         }
     }

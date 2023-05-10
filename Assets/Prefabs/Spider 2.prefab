@@ -2197,7 +2197,7 @@ Transform:
   - {fileID: 8214681071172043796}
   - {fileID: 4957683292384058005}
   m_Father: {fileID: 6137863078893158720}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!95 &2241404206369334143
 Animator:
@@ -2566,7 +2566,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6137863078893158720}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6137863078750604244
 MeshFilter:
@@ -2650,6 +2650,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4199464696711021272}
   - {fileID: 5330922292132722949}
   - {fileID: 6137863078749815012}
   m_Father: {fileID: 0}
@@ -2719,11 +2720,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 6137863078893158723}
   enemyType: 1
-  target: {fileID: 0}
+  target: {fileID: 8038221428809585315, guid: 8e54007d58538154fa965729a65f45f5, type: 3}
   rockToThrow: {fileID: 1774935105055644483, guid: ba170a0fb490ffa42a10fd502ccb1a4d,
     type: 3}
   throwingPoint: {fileID: 6137863078045905781}
   timeToThrow: 2
+  raycastOrigin: {fileID: 4199464696711021272}
+  raycastRadius: 0.2
+  raycastMaxDistance: 6
+  raycastLayers:
+    serializedVersion: 2
+    m_Bits: 448
   distanceToStartChasing: 5
   distanceToStopChasing: 1
   distanceToStartThrowing: 4
@@ -3510,6 +3517,37 @@ Transform:
   m_Children:
   - {fileID: 2786915449273714477}
   m_Father: {fileID: 4650798494023518466}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8726185511305858637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4199464696711021272}
+  m_Layer: 0
+  m_Name: Raycast origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4199464696711021272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8726185511305858637}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.247, z: 0.205}
+  m_LocalScale: {x: 30, y: 30, z: 30}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6137863078893158720}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8788048502708089646

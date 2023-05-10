@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -19,6 +20,10 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float timeToThrow = 2f;
     private float timeLeftToThrow;
 
+    [SerializeField] private Transform raycastOrigin;
+    [SerializeField] private float raycastRadius = 0.2f;
+    [SerializeField] private float raycastMaxDistance = 6f;
+    [SerializeField] private LayerMask raycastLayers;
 
     [SerializeField] private float distanceToStartChasing = 5f;
     [SerializeField] private float distanceToStopChasing = 0;
@@ -71,15 +76,53 @@ public class EnemyController : MonoBehaviour
         return 0;
     }
 
+    private int SetPointsForKill(EnemyTypes enemyType)
+    {
+        switch (enemyType)
+        {
+            case EnemyTypes.Spider1:
+                return 10;
+            case EnemyTypes.Spider2:
+                return 20;
+            default:
+                break;
+        }
+        return 0;
+    }
+
+    private bool IsTargetInSight()
+    {
+        bool isHitting = Physics.SphereCast(raycastOrigin.position, raycastRadius, raycastOrigin.forward, out RaycastHit target, raycastMaxDistance, raycastLayers);
+
+        if(isHitting && target.collider.CompareTag("Player"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    //Borrar:
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(raycastOrigin.position, raycastOrigin.position + raycastOrigin.forward * raycastMaxDistance);
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(raycastOrigin.position, raycastRadius);
+    }
+
     private void Look(Vector3 direction)
     {
-        Quaternion rotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+            Quaternion rotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
     }
 
     private void Move(float movSpeed, Vector3 direction)
     {
-        if (direction != Vector3.zero)
+        if (IsTargetInSight() && direction != Vector3.zero)
         {
             transform.position += movSpeed * Time.deltaTime * direction;
 
@@ -103,7 +146,7 @@ public class EnemyController : MonoBehaviour
 
     private void Throw(Vector3 direction)
     {
-        if (distanceToStartThrowing >= direction.magnitude && timeLeftToThrow <= 0)
+        if (IsTargetInSight() && distanceToStartThrowing >= direction.magnitude && timeLeftToThrow <= 0)
         {
             animator.SetBool("isThrowing", true);
             Instantiate(rockToThrow, throwingPoint.position, throwingPoint.rotation);
@@ -120,11 +163,12 @@ public class EnemyController : MonoBehaviour
         health -= damagePoints;
         animator.SetTrigger("isTakingDamage");
 
-        if (health - damagePoints <= 0)
+        if (health - damagePoints < 0)
         {
             health = 0;
             animator.SetBool("isThrowing", false);
             animator.SetInteger("health", 0);
+            GameManager.Instance.AddScore(SetPointsForKill(enemyType));
             StartCoroutine(WaitForDeathAnimation());
         }
     }
