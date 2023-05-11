@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour
 
     private string characterName = "Dexter";
     private Vector3 characterSize = new Vector3(x: 0.35f, y: 0.35f, z: 0.35f);
-    [SerializeField] private float health = 100;
+    private Vector3 initialPosition = new Vector3(x: 0, y: 0, z: 0);
+    private float health;
     private float maxHealth = 100;
 
     [SerializeField] private float jumpingForce = 15f;
@@ -126,8 +127,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("LevelEnd"))
+        {
+            GameManager.Instance.SaveData(health, initialPosition);
+        }
+    }
+
     private void Awake()
     {
+        health = maxHealth;
         var isSpeedValid = movementSpeed > 0;
         var isNameValid = !string.IsNullOrEmpty(characterName);
 
@@ -138,6 +148,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         transform.localScale = characterSize;
+
+        GameManager.Instance.LoadData(health, initialPosition);
     }
 
     void Update()
