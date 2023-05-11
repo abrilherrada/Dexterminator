@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private SavingManager savingManager;
     public static GameManager Instance;
 
     private void Awake()
@@ -39,5 +40,15 @@ public class GameManager : MonoBehaviour
     public void TryToLoadLevel(string levelName)
     {
         levelManager.LoadLevel(levelName);
+    }
+
+    public void SaveData(float currentHealth, Vector3 playerPosition)
+    {
+        savingManager.Save(currentHealth, playerPosition);
+    }
+
+    public void LoadData(float currentHealth, Vector3 playerPosition)
+    {
+        savingManager.Load(currentHealth, playerPosition);
     }
 }
