@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public enum EnemyTypes
@@ -10,8 +9,18 @@ public enum EnemyTypes
     Spider2
 }
 
+public struct EnemyData
+{
+    public float damageTaken;
+    public float damageDone;
+    public int pointsForKill;
+}
+
 public class EnemyController : MonoBehaviour
 {
+    private Dictionary<string, EnemyData> enemiesDictionary = new Dictionary<string, EnemyData>();
+    private string enemyKey;
+
     [SerializeField] private Animator animator;
     [SerializeField] private EnemyTypes enemyType;
     [SerializeField] private Transform target;
@@ -40,54 +49,11 @@ public class EnemyController : MonoBehaviour
                 Chase(direction);
                 break;
             case EnemyTypes.Spider2:
-                Look(direction.normalized);
                 Throw(direction);
                 break;
             default:
                 break;
         }
-    }
-
-    private float SetDamageTaken(EnemyTypes enemyType)
-    {
-        switch (enemyType) 
-        {
-            case EnemyTypes.Spider1:
-                return 25f;
-            case EnemyTypes.Spider2:
-                return 20f;
-            default:
-                break;
-        }
-        return 0;
-    }
-
-    private float SetDamageDone(EnemyTypes enemyType) 
-    {
-        switch (enemyType)
-        {
-            case EnemyTypes.Spider1:
-                return 10f;
-            case EnemyTypes.Spider2:
-                return 15f;
-            default:
-                break;
-        }
-        return 0;
-    }
-
-    private int SetPointsForKill(EnemyTypes enemyType)
-    {
-        switch (enemyType)
-        {
-            case EnemyTypes.Spider1:
-                return 10;
-            case EnemyTypes.Spider2:
-                return 20;
-            default:
-                break;
-        }
-        return 0;
     }
 
     private bool IsTargetInSight()
@@ -146,6 +112,8 @@ public class EnemyController : MonoBehaviour
 
     private void Throw(Vector3 direction)
     {
+        Look(direction.normalized);
+
         if (IsTargetInSight() && distanceToStartThrowing >= direction.magnitude && timeLeftToThrow <= 0)
         {
             animator.SetBool("isThrowing", true);
@@ -168,7 +136,7 @@ public class EnemyController : MonoBehaviour
             health = 0;
             animator.SetBool("isThrowing", false);
             animator.SetInteger("health", 0);
-            GameManager.Instance.AddScore(SetPointsForKill(enemyType));
+            GameManager.Instance.AddScore(GetEnemy().pointsForKill);
             StartCoroutine(WaitForDeathAnimation());
         }
     }
@@ -184,12 +152,48 @@ public class EnemyController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && collision.gameObject.TryGetComponent(out PlayerController player))
         {
             animator.SetTrigger("isAttacking");
-            player.TakeDamage(SetDamageDone(enemyType));  
+            player.TakeDamage(GetEnemy().damageDone);
         }
 
         if (collision.gameObject.CompareTag("Projectile"))
         {
-            TakeDamage(SetDamageTaken(enemyType));
+            TakeDamage(GetEnemy().damageTaken);
+        }
+    }
+
+    private EnemyData GetEnemy()
+    {
+        if(enemiesDictionary.Count > 0)
+        {
+            var enemy = enemiesDictionary[enemyKey];
+            return enemy; 
+        }
+        return default;
+    }
+
+    private void Awake()
+    {
+        if(enemyType == EnemyTypes.Spider1)
+        {
+            EnemyData enemyData = new EnemyData()
+            {
+                damageTaken = 25f,
+                damageDone = 10f,
+                pointsForKill = 10,
+            };
+            enemiesDictionary.Add("Spider1", enemyData);
+            enemyKey = "Spider1";
+        }
+        if(enemyType == EnemyTypes.Spider2)
+        {
+            EnemyData enemyData = new EnemyData()
+            {
+                damageTaken = 20f,
+                damageDone = 15f,
+                pointsForKill = 20,
+            };
+            enemiesDictionary.Add("Spider2", enemyData);
+            enemyKey = "Spider2";
         }
     }
 
