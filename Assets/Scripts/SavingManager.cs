@@ -1,46 +1,100 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 
 [Serializable]
-public struct SavedData
+public struct SavedCharacterData
 {
     public float health;
     public Vector3 initialPosition;
 
-    public SavedData(float playerHealth, Vector3 playerInitialPosition)
+    public SavedCharacterData(float playerHealth, Vector3 playerInitialPosition)
     {
         health = playerHealth;
         initialPosition = playerInitialPosition;
     }
 }
 
+[Serializable]
+public struct SavedUser
+{
+    public string username;
+    public SavedCharacterData characterData;
+
+    public SavedUser(string name, float currentHealth, Vector3 playerPosition)
+    {
+        username = name;
+        characterData = new SavedCharacterData(currentHealth, playerPosition);
+    }
+}
+
+[Serializable]
+public struct SavedUserArray
+{
+    public List<SavedUser> users;
+}
+
 public class SavingManager : MonoBehaviour
 {
-    public void Save(float currentHealth, Vector3 playerPosition)
-    {
-        var data = new SavedData(currentHealth, playerPosition);
-        string jsonData = JsonUtility.ToJson(data, true);
-        var path = Application.dataPath + "/data.json";
-        File.WriteAllText(path, jsonData);
+    private string dataFilePath;
+    private SavedUserArray savedUserArray = new SavedUserArray();
 
-        Debug.Log($"la vida guardada es {currentHealth}");
-        Debug.Log($"la posicion guardada es {playerPosition}");
+    private void Awake()
+    {
+        dataFilePath = Application.dataPath + "/data.json";
+        LoadExistingData();
     }
 
-    public void Load(float currentHealth, Vector3 playerPosition)
+    public void SaveData(string username, float currentHealth, Vector3 playerPosition)
     {
-        var path = Application.dataPath + "/data.json";
-        var jsonData = File.ReadAllText(path);
-        var loadedJson = JsonUtility.FromJson<SavedData>(jsonData);
+        int existingUserIndex = savedUserArray.users.FindIndex(user => user.username == username);
 
-        currentHealth = loadedJson.health;
-        playerPosition = loadedJson.initialPosition;
+        if(existingUserIndex >= 0)
+        {
+            SavedUser existingUser = savedUserArray.users[existingUserIndex];
+            
+            existingUser.characterData.health = currentHealth;
+            existingUser.characterData.initialPosition = playerPosition;
 
-        Debug.Log($"la vida cargada es {currentHealth}");
-        Debug.Log($"la posicion cargada es {playerPosition}");
+            savedUserArray.users[existingUserIndex] = existingUser;
+        }
+        else
+        {
+            SavedUser newUser = new SavedUser(username, currentHealth, playerPosition);
+
+            savedUserArray.users.Add(newUser);
+        }
+
+        string jsonData = JsonUtility.ToJson(savedUserArray, true);
+
+        File.WriteAllText(dataFilePath, jsonData);
+    }
+    
+    public void LoadExistingData()
+    {
+        if(File.Exists(dataFilePath))
+        {
+            string jsonData = File.ReadAllText(dataFilePath);
+
+            savedUserArray = JsonUtility.FromJson<SavedUserArray>(jsonData);
+        }
+        else
+        {
+            savedUserArray.users = new List<SavedUser>();
+        }
+    }
+
+    public SavedUser LoadData(string username)
+    {
+        SavedUser foundUser = savedUserArray.users.Find(user => user.username == username);
+        
+        return foundUser;
+    }
+
+    public SavedUser[] GetSavedUsers()
+    {
+        return savedUserArray.users.ToArray();
     }
 }

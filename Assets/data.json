@@ -1,8 +1,59 @@
 {
-    "health": 50.0,
-    "initialPosition": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    }
+    "users": [
+        {
+            "username": "abril",
+            "characterData": {
+                "health": 80.0,
+                "initialPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
+            }
+        },
+        {
+            "username": "lego",
+            "characterData": {
+                "health": 100.0,
+                "initialPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
+            }
+        },
+        {
+            "username": "juan",
+            "characterData": {
+                "health": 100.0,
+                "initialPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
+            }
+        },
+        {
+            "username": "dfgdfg",
+            "characterData": {
+                "health": 100.0,
+                "initialPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
+            }
+        },
+        {
+            "username": "sasdasd",
+            "characterData": {
+                "health": 100.0,
+                "initialPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
+            }
+        }
+    ]
 }

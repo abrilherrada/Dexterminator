@@ -212,6 +212,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a032c512029f8f4390c5b181a473c9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuManager: {fileID: 1167951275030643519, guid: 9aa7147c2f808d546bbc1ad9284738d0,
+    type: 3}
+  healer: {fileID: 2125331383829711309}
   consumer: {fileID: 2125331383829711308}
   healingPoints: 10
 --- !u!1 &2125331384780908769

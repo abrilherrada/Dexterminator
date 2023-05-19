@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private MainMenu mainMenu;
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private SavingManager savingManager;
@@ -22,7 +20,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-
+    
     private void Update()
     {
         if(levelManager.isLevelFinished)
@@ -44,11 +42,11 @@ public class GameManager : MonoBehaviour
 
     public void SaveData(float currentHealth, Vector3 playerPosition)
     {
-        savingManager.Save(currentHealth, playerPosition);
+        savingManager.SaveData(mainMenu.username, currentHealth, playerPosition);
     }
 
-    public void LoadData(float currentHealth, Vector3 playerPosition)
+    public void LoadData()
     {
-        savingManager.Load(currentHealth, playerPosition);
+        savingManager.LoadData(mainMenu.username);
     }
 }

@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BallShooter : MonoBehaviour
 {
+    [SerializeField] private PlayerController player;
+
+    [SerializeField] private Image shooterCooldown;
+
     //[SerializeField] private Rigidbody ballRigidbody;
     [SerializeField] private KeyCode shootKey = KeyCode.L;
 
@@ -18,12 +23,18 @@ public class BallShooter : MonoBehaviour
 
     private void Shoot(Transform shootingPoint)
     {
-        Instantiate(ballToShoot, shootingPoint.position, shootingPoint.rotation);
+        if(player.GetCollectedAmmunition() > 0)
+        {
+            Instantiate(ballToShoot, shootingPoint.position, shootingPoint.rotation);
 
-        //Vector3 forceVector = shootingDirection * shootingForce;
-        //ballRigidbody.AddForce(forceVector, ForceMode.Impulse);
+            player.UseAmmunition(1);
 
-        timeLeftToShoot = timeToShoot;
+            //Vector3 forceVector = shootingDirection * shootingForce;
+            //ballRigidbody.AddForce(forceVector, ForceMode.Impulse);
+
+            timeLeftToShoot = timeToShoot;
+            shooterCooldown.fillAmount = 0;
+        }
     }
     private void Inputs()
     {
@@ -37,6 +48,7 @@ public class BallShooter : MonoBehaviour
     private void Update()
     {
         timeLeftToShoot -= Time.deltaTime;
+        shooterCooldown.fillAmount += Time.deltaTime * 2;
         Inputs();
     }
 }

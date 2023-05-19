@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class HealingController : MonoBehaviour
 {
+    [SerializeField] GameObject healer;
     [SerializeField] Consumer consumer;
     [SerializeField] private float healingPoints = 10;
     private float lastChange;
@@ -21,9 +22,11 @@ public class HealingController : MonoBehaviour
             if (consumer.allConsumed)
             {
                 GameManager.Instance.AddScore(pointsForCollecting);
-                player.GetHealed(healingPoints);
-                healingPoints = 0;
                 pointsForCollecting = 0;
+                player.GetHealed(healingPoints);
+                player.CollectHealer();
+                Destroy(healer);
+                
             }
         }
     }
