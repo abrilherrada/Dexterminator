@@ -21,6 +21,8 @@ public class EnemyController : MonoBehaviour
     private Dictionary<string, EnemyData> enemiesDictionary = new Dictionary<string, EnemyData>();
     private string enemyKey;
 
+    [SerializeField] private PlayerController player;
+    
     [SerializeField] private Animator animator;
     [SerializeField] private EnemyTypes enemyType;
     [SerializeField] private Transform target;
@@ -134,11 +136,17 @@ public class EnemyController : MonoBehaviour
         if (health - damagePoints < 0)
         {
             health = 0;
-            animator.SetBool("isThrowing", false);
-            animator.SetInteger("health", 0);
-            GameManager.Instance.AddScore(GetEnemy().pointsForKill);
-            StartCoroutine(WaitForDeathAnimation());
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        animator.SetBool("isThrowing", false);
+        animator.SetInteger("health", 0);
+        GameManager.Instance.AddScore(GetEnemy().pointsForKill);
+        player.CollectEnemy();
+        StartCoroutine(WaitForDeathAnimation());
     }
 
     private IEnumerator WaitForDeathAnimation()
@@ -155,7 +163,7 @@ public class EnemyController : MonoBehaviour
             player.TakeDamage(GetEnemy().damageDone);
         }
 
-        if (collision.gameObject.CompareTag("Projectile"))
+        if (collision.gameObject.CompareTag("Projectile") && health > 0)
         {
             TakeDamage(GetEnemy().damageTaken);
         }

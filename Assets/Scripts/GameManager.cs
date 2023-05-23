@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -9,6 +6,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private SavingManager savingManager;
     public static GameManager Instance;
+
+    private string username;
 
     private void Awake()
     {
@@ -22,7 +21,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-
+    
     private void Update()
     {
         if(levelManager.isLevelFinished)
@@ -30,6 +29,16 @@ public class GameManager : MonoBehaviour
             levelManager.isLevelFinished = false;
             TryToLoadLevel("Level2");
         }
+    }
+
+    public void SetUsername(string name)
+    {
+        username = name;
+    }
+
+    public string GetUsername()
+    {
+        return username;
     }
 
     public void AddScore(int score)
@@ -44,11 +53,12 @@ public class GameManager : MonoBehaviour
 
     public void SaveData(float currentHealth, Vector3 playerPosition)
     {
-        savingManager.Save(currentHealth, playerPosition);
+        savingManager.SaveData(username, currentHealth, playerPosition);
     }
 
-    public void LoadData(float currentHealth, Vector3 playerPosition)
+    public void LoadAndSaveData()
     {
-        savingManager.Load(currentHealth, playerPosition);
+        SavedCharacterData savedData = savingManager.LoadData(username);
+        SaveData(savedData.health, savedData.initialPosition);
     }
 }

@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody playerRigidbody;
     [SerializeField] private Animator animator;
-    [SerializeField] private KeyCode jumpKey = KeyCode.K;
-    [SerializeField] private KeyCode spinKey = KeyCode.J;
+    private KeyCode jumpKey = KeyCode.K;
+    private KeyCode spinKey = KeyCode.J;
 
     private string characterName = "Dexter";
     private Vector3 characterSize = new Vector3(x: 0.35f, y: 0.35f, z: 0.35f);
@@ -17,13 +17,57 @@ public class PlayerController : MonoBehaviour
     private float health;
     private float maxHealth = 100;
 
-    [SerializeField] private float jumpingForce = 15f;
-    [SerializeField] private float movementSpeed = 2f;
-    [SerializeField] private float rotationSpeed = 360;
+    private int collectedHealers = 0;
+    private int collectedEnemies = 0;
+    private int collectedAmmunition = 10;
+
+    private float jumpingForce = 15f;
+    private float movementSpeed = 2f;
+    private float rotationSpeed = 360;
 
     [SerializeField] private Transform raycastOrigin;
     [SerializeField] private float raycastMaxDistance = 0.1f;
     [SerializeField] private LayerMask raycastLayers;
+
+    public float GetHealth()
+    {
+        return health;
+    }
+
+    public void CollectHealer()
+    {
+        collectedHealers += 1;
+    }
+
+    public int GetCollectedHealers()
+    {
+        return collectedHealers;
+    }
+
+    public void CollectAmmunition(int amountGranted)
+    {
+        collectedAmmunition += amountGranted;
+    }
+
+    public void UseAmmunition(int amountUsed)
+    {
+        collectedAmmunition -= amountUsed;
+    }
+
+    public int GetCollectedAmmunition()
+    {
+        return collectedAmmunition;
+    }
+
+    public void CollectEnemy()
+    {
+        collectedEnemies += 1;
+    }
+
+    public int GetCollectedEnemies()
+    {
+        return collectedEnemies;
+    }
 
     private bool IsOnGround()
     {
@@ -148,8 +192,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         transform.localScale = characterSize;
-
-        GameManager.Instance.LoadData(health, initialPosition);
     }
 
     void Update()
