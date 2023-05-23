@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("LevelEnd"))
         {
-            GameManager.Instance.SaveData(health, initialPosition);
+            //GameManager.Instance.SaveData(health, initialPosition);
         }
     }
 
@@ -192,8 +192,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         transform.localScale = characterSize;
-
-        GameManager.Instance.LoadData();
     }
 
     void Update()

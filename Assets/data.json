@@ -34,18 +34,7 @@
             }
         },
         {
-            "username": "dfgdfg",
-            "characterData": {
-                "health": 100.0,
-                "initialPosition": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                }
-            }
-        },
-        {
-            "username": "sasdasd",
+            "username": "dexter",
             "characterData": {
                 "health": 100.0,
                 "initialPosition": {

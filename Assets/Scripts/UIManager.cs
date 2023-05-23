@@ -8,11 +8,9 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] PlayerController playerController;
 
-    [SerializeField] private GameObject welcomeMenu;
     [SerializeField] private GameObject ingameUI;
     [SerializeField] private GameObject mainMenu;
 
-    [SerializeField] private Button startButton;
     [SerializeField] private Button menuButton;
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button quitButton;
@@ -27,11 +25,9 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        welcomeMenu.SetActive(true);
-        ingameUI.SetActive(false);
+        ingameUI.SetActive(true);
         mainMenu.SetActive(false);
 
-        startButton.onClick.AddListener(StartGame);
         menuButton.onClick.AddListener(GoToMainMenu);
         resumeButton.onClick.AddListener(ResumeGame);
         quitButton.onClick.AddListener(QuitGame);
@@ -39,37 +35,24 @@ public class UIManager : MonoBehaviour
         healthBar.interactable = false;
     }
 
-    private void StartGame()
-    {
-        welcomeMenu.SetActive(false);
-        ingameUI.SetActive(true);
-        mainMenu.SetActive(false);
-
-        GameManager.Instance.SaveData(100, Vector3.zero);
-    }
-
     private void GoToMainMenu()
     {
         UpdateCollectedHealers();
         UpdateCollectedEnemies();
 
-        welcomeMenu.SetActive(false);
         ingameUI.SetActive(false);
         mainMenu.SetActive(true);
     }
 
     private void ResumeGame()
     {
-        welcomeMenu.SetActive(false);
         ingameUI.SetActive(true);
         mainMenu.SetActive(false);
     }
 
     private void QuitGame()
     {
-        welcomeMenu.SetActive(true);
-        ingameUI.SetActive(false);
-        mainMenu.SetActive(false);
+        Debug.Log("Game over");
     }
     private void UpdateCollectedHealers()
     {

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -7,13 +5,15 @@ public class UIItem : MonoBehaviour
 {
     [SerializeField] private TMP_Text userButtonText;
 
+    public event System.Action<string> ButtonClicked;
+
     public void SetText(string text)
     {
         userButtonText.text = text;
     }
 
-    public string GetText()
+    public void OnButtonClick()
     {
-        return userButtonText.text;
+        ButtonClicked?.Invoke(userButtonText.text);
     }
 }

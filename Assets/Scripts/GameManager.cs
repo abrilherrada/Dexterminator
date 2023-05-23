@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private MainMenu mainMenu;
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private SavingManager savingManager;
     public static GameManager Instance;
+
+    private string username;
 
     private void Awake()
     {
@@ -30,6 +31,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetUsername(string name)
+    {
+        username = name;
+    }
+
+    public string GetUsername()
+    {
+        return username;
+    }
+
     public void AddScore(int score)
     {
         scoreManager.Add(score);
@@ -42,11 +53,12 @@ public class GameManager : MonoBehaviour
 
     public void SaveData(float currentHealth, Vector3 playerPosition)
     {
-        savingManager.SaveData(mainMenu.username, currentHealth, playerPosition);
+        savingManager.SaveData(username, currentHealth, playerPosition);
     }
 
-    public void LoadData()
+    public void LoadAndSaveData()
     {
-        savingManager.LoadData(mainMenu.username);
+        SavedCharacterData savedData = savingManager.LoadData(username);
+        SaveData(savedData.health, savedData.initialPosition);
     }
 }

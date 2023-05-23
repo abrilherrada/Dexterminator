@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -17,13 +15,6 @@ public class UsernameValidator : MonoBehaviour
 
     [SerializeField] private Button startButton;
 
-    private string username;
-
-    public string GetUsername()
-    {
-        return username;
-    }
-
     private void Awake()
     {
         var existingUsers = savingManager.GetSavedUsers().Count();
@@ -38,9 +29,9 @@ public class UsernameValidator : MonoBehaviour
         errorMessage.enabled = false;
         successMessage.enabled = false;
         callToActionMessage.enabled = true;
-        startButton.interactable = false;
 
         enteredName.onValueChanged.AddListener(OnValueChangeHandler);
+        enteredName.onEndEdit.AddListener(OnEndEditHandler);
     }
 
     private void OnValueChangeHandler(string data)
@@ -50,13 +41,17 @@ public class UsernameValidator : MonoBehaviour
 
         if (enteredName.text.Length > 3)
         {
-            username = enteredName.text;
+            GameManager.Instance.SetUsername(enteredName.text);
             successMessage.enabled = true;
-            startButton.interactable = true;
         }
         else
         {
             errorMessage.enabled = true;
         }
+    }
+
+    private void OnEndEditHandler(string data)
+    {
+        GameManager.Instance.SaveData(100, Vector3.zero);
     }
 }

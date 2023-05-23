@@ -86,11 +86,11 @@ public class SavingManager : MonoBehaviour
         }
     }
 
-    public SavedUser LoadData(string username)
+    public SavedCharacterData LoadData(string username)
     {
         SavedUser foundUser = savedUserArray.users.Find(user => user.username == username);
         
-        return foundUser;
+        return foundUser.characterData;
     }
 
     public SavedUser[] GetSavedUsers()

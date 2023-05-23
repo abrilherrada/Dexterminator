@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604c5b35d8d300f4286fa9dfeb2a131c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenu: {fileID: 0}
   scoreManager: {fileID: 1634620684}
   levelManager: {fileID: 1846645648}
   savingManager: {fileID: 821061354}
@@ -1302,6 +1301,7 @@ MonoBehaviour:
     type: 3}
   parent: {fileID: 1095339787}
   savingManager: {fileID: 821061354}
+  mainMenu: {fileID: 1603654808}
 --- !u!114 &1095339789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2047,9 +2047,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   validator: {fileID: 1139313487}
   startButton: {fileID: 376631510}
-  user: {fileID: -3230142613680097210, guid: 06f8a6ddbcd0f034c993989a8100be33, type: 3}
-  userButton: {fileID: 8166679184649141900, guid: 06f8a6ddbcd0f034c993989a8100be33,
-    type: 3}
   username: 
 --- !u!1 &1609669549
 GameObject:
