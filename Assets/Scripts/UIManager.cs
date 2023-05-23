@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] PlayerController playerController;
 
     [SerializeField] private GameObject ingameUI;
-    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject pauseMenu;
 
     [SerializeField] private Button menuButton;
     [SerializeField] private Button resumeButton;
@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         ingameUI.SetActive(true);
-        mainMenu.SetActive(false);
+        pauseMenu.SetActive(false);
 
         menuButton.onClick.AddListener(GoToMainMenu);
         resumeButton.onClick.AddListener(ResumeGame);
@@ -41,18 +41,18 @@ public class UIManager : MonoBehaviour
         UpdateCollectedEnemies();
 
         ingameUI.SetActive(false);
-        mainMenu.SetActive(true);
+        pauseMenu.SetActive(true);
     }
 
     private void ResumeGame()
     {
         ingameUI.SetActive(true);
-        mainMenu.SetActive(false);
+        pauseMenu.SetActive(false);
     }
 
     private void QuitGame()
     {
-        Debug.Log("Game over");
+        GameManager.Instance.TryToLoadLevel("MainMenu");
     }
     private void UpdateCollectedHealers()
     {

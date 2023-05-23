@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("LevelEnd"))
         {
-            //GameManager.Instance.SaveData(health, initialPosition);
+            GameManager.Instance.SaveData(health, initialPosition);
         }
     }
 

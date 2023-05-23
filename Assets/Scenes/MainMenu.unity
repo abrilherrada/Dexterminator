@@ -170,7 +170,6 @@ Transform:
   - {fileID: 1634620685}
   - {fileID: 1846645652}
   - {fileID: 821061355}
-  - {fileID: 1139313488}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -636,7 +635,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &595546578
 GameObject:
@@ -1301,7 +1300,6 @@ MonoBehaviour:
     type: 3}
   parent: {fileID: 1095339787}
   savingManager: {fileID: 821061354}
-  mainMenu: {fileID: 1603654808}
 --- !u!114 &1095339789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1368,12 +1366,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1139313486}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.2052777, y: 1.2343583, z: 0.7393477}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 34870800}
+  m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1166440398
@@ -2026,7 +2024,7 @@ RectTransform:
   m_Children:
   - {fileID: 1366020990}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2047,7 +2045,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   validator: {fileID: 1139313487}
   startButton: {fileID: 376631510}
-  username: 
 --- !u!1 &1609669549
 GameObject:
   m_ObjectHideFlags: 0
