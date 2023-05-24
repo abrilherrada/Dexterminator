@@ -26,7 +26,6 @@ public class HealingController : MonoBehaviour
                 player.GetHealed(healingPoints);
                 player.CollectHealer();
                 Destroy(healer);
-                
             }
         }
     }
