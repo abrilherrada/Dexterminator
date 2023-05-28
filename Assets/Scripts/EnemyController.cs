@@ -96,7 +96,7 @@ public class EnemyController : PC
         }
     }
 
-    private void Die()
+    public override void Die()
     {
         animator.SetBool("isThrowing", false);
         GameManager.Instance.AddScore(GetEnemy().pointsForKill);
@@ -140,9 +140,6 @@ public class EnemyController : PC
 
     private void Awake()
     {
-        movementSpeed = 1f;
-        rotationSpeed = 60f;
-
         if (enemyType == EnemyTypes.Spider1)
         {
             EnemyData enemyData = new EnemyData()

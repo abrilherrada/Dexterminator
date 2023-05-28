@@ -1,22 +1,20 @@
 using UnityEngine;
 
-public class PC : Entity
+public abstract class PC : Entity
 {
+    [SerializeField] private PCData data;
+
     [SerializeField] protected Animator animator;
 
     protected float health;
-    protected float maxHealth = 100;
-
-    protected float movementSpeed;
-    protected float rotationSpeed;
 
     public void GetHealed(float healingPoints)
     {
-        if (health + healingPoints > maxHealth)
+        if (health + healingPoints > data.maxHealth)
         {
-            health = maxHealth;
+            health = data.maxHealth;
         }
-        else if (health + healingPoints <= maxHealth && health > 0)
+        else if (health + healingPoints <= data.maxHealth && health > 0)
         {
             health += healingPoints;
         }
@@ -38,18 +36,21 @@ public class PC : Entity
 
     protected void Move(Vector3 direction)
     {
-        transform.Translate(movementSpeed * Time.deltaTime * direction, Space.World);
+        transform.Translate(data.movementSpeed * Time.deltaTime * direction, Space.World);
         animator.SetBool("isMoving", true);
     }
 
     protected void Look(Vector3 direction)
     {
         Quaternion rotation = Quaternion.LookRotation(direction.normalized);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, data.rotationSpeed * Time.deltaTime);
     }
+
+    public abstract void Die();
 
     private void Start()
     {
-        health = maxHealth;
+        health = data.maxHealth;
+        Debug.Log(gameObject.name + data.rotationSpeed);
     }
 }

@@ -107,6 +107,12 @@ public class PlayerController : PC
         }
     }
 
+    public override void Die()
+    {
+        Debug.Log("Game over");
+        //Set death animation
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Rock"))
@@ -125,8 +131,6 @@ public class PlayerController : PC
 
     private void Awake()
     {
-        movementSpeed = 2f;
-        rotationSpeed = 360;
         health = GameManager.Instance.GetSavedHealth();
     }
 
