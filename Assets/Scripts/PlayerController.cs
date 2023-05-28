@@ -109,8 +109,7 @@ public class PlayerController : PC
 
     public override void Die()
     {
-        Debug.Log("Game over");
-        //Set death animation
+        Debug.Log("Game over"); //Replace with Game Over screen
     }
 
     private void OnCollisionEnter(Collision collision)

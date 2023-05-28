@@ -8,17 +8,9 @@ public enum EnemyTypes
     Spider2
 }
 
-public struct EnemyData
-{
-    public float damageTaken;
-    public float damageDone;
-    public int pointsForKill;
-}
-
 public class EnemyController : PC
 {
-    private Dictionary<string, EnemyData> enemiesDictionary = new Dictionary<string, EnemyData>();
-    private string enemyKey;
+    [SerializeField] private EnemyData enemyData;
 
     [SerializeField] private PlayerController player;
     [SerializeField] private EnemyTypes enemyType;
@@ -99,7 +91,7 @@ public class EnemyController : PC
     public override void Die()
     {
         animator.SetBool("isThrowing", false);
-        GameManager.Instance.AddScore(GetEnemy().pointsForKill);
+        GameManager.Instance.AddScore(enemyData.pointsForKill);
         player.CollectEnemy();
         StartCoroutine(WaitForDeathAnimation());
     }
@@ -115,52 +107,16 @@ public class EnemyController : PC
         if (collision.gameObject.CompareTag("Player") && collision.gameObject.TryGetComponent(out PlayerController player))
         {
             animator.SetTrigger("isAttacking");
-            player.TakeDamage(GetEnemy().damageDone);
+            player.TakeDamage(enemyData.damageDone);
         }
 
         if (collision.gameObject.CompareTag("Projectile") && health > 0)
         {
-            TakeDamage(GetEnemy().damageTaken);
+            TakeDamage(enemyData.damageTaken);
             if (health <= 0)
             {
                 Die();
             }
-        }
-    }
-
-    private EnemyData GetEnemy()
-    {
-        if(enemiesDictionary.Count > 0)
-        {
-            var enemy = enemiesDictionary[enemyKey];
-            return enemy; 
-        }
-        return default;
-    }
-
-    private void Awake()
-    {
-        if (enemyType == EnemyTypes.Spider1)
-        {
-            EnemyData enemyData = new EnemyData()
-            {
-                damageTaken = 25f,
-                damageDone = 10f,
-                pointsForKill = 10,
-            };
-            enemiesDictionary.Add("Spider1", enemyData);
-            enemyKey = "Spider1";
-        }
-        if(enemyType == EnemyTypes.Spider2)
-        {
-            EnemyData enemyData = new EnemyData()
-            {
-                damageTaken = 20f,
-                damageDone = 15f,
-                pointsForKill = 20,
-            };
-            enemiesDictionary.Add("Spider2", enemyData);
-            enemyKey = "Spider2";
         }
     }
 

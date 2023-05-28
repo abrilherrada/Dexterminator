@@ -51,6 +51,5 @@ public abstract class PC : Entity
     private void Start()
     {
         health = data.maxHealth;
-        Debug.Log(gameObject.name + data.rotationSpeed);
     }
 }
