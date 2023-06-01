@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     private string username;
+    private float health;
 
     private void Awake()
     {
@@ -41,6 +42,8 @@ public class GameManager : MonoBehaviour
         return username;
     }
 
+    public float GetSavedHealth() => health;
+
     public void AddScore(int score)
     {
         scoreManager.Add(score);
@@ -59,6 +62,7 @@ public class GameManager : MonoBehaviour
     public void LoadAndSaveData()
     {
         SavedCharacterData savedData = savingManager.LoadData(username);
+        health = savedData.health;
         SaveData(savedData.health, savedData.initialPosition);
     }
 }
