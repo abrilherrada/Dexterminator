@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private HealthSystem healthSystem;
     [SerializeField] PlayerController playerController;
 
     [SerializeField] private GameObject ingameUI;
@@ -33,13 +33,15 @@ public class UIManager : MonoBehaviour
         quitButton.onClick.AddListener(QuitGame);
 
         healthBar.interactable = false;
+
+        healthSystem.OnHealthChange += UpdateHealthBar;
+        playerController.OnItemCollected += UpdateCollectedHealers;
+        playerController.OnItemCollected += UpdateCollectedEnemies;
+        playerController.OnItemCollected += UpdateCollectedAmmunition;
     }
 
     private void GoToMainMenu()
     {
-        UpdateCollectedHealers();
-        UpdateCollectedEnemies();
-
         ingameUI.SetActive(false);
         pauseMenu.SetActive(true);
     }
@@ -75,14 +77,7 @@ public class UIManager : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        var playerHealth = playerController.GetHealth();
+        var playerHealth = playerController.healthSystem.GetHealth();
         healthBar.value = playerHealth / 100;
     }
-
-    private void Update()
-    {
-        UpdateHealthBar();
-        UpdateCollectedAmmunition();
-    }
-
 }

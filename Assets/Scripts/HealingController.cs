@@ -23,7 +23,7 @@ public class HealingController : MonoBehaviour
             {
                 GameManager.Instance.AddScore(pointsForCollecting);
                 pointsForCollecting = 0;
-                player.GetHealed(healingPoints);
+                player.healthSystem.GetHealed(healingPoints);
                 player.CollectHealer();
                 Destroy(healer);
             }

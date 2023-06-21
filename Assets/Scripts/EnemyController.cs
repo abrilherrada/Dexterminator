@@ -62,7 +62,7 @@ public class EnemyController : PC
     {
         Look(direction);
 
-        if (distanceToStartChasing >= direction.magnitude && direction.magnitude > distanceToStopChasing && health > 0 && IsTargetInSight() && direction != Vector3.zero)
+        if (distanceToStartChasing >= direction.magnitude && direction.magnitude > distanceToStopChasing && healthSystem.GetHealth() > 0 && IsTargetInSight() && direction != Vector3.zero)
         {
             Move(direction);
         }
@@ -107,13 +107,13 @@ public class EnemyController : PC
         if (collision.gameObject.CompareTag("Player") && collision.gameObject.TryGetComponent(out PlayerController player))
         {
             animator.SetTrigger("isAttacking");
-            player.TakeDamage(enemyData.damageDone);
+            player.healthSystem.TakeDamage(enemyData.damageDone);
         }
 
-        if (collision.gameObject.CompareTag("Projectile") && health > 0)
+        if (collision.gameObject.CompareTag("Projectile") && healthSystem.GetHealth() > 0)
         {
-            TakeDamage(enemyData.damageTaken);
-            if (health <= 0)
+            healthSystem.TakeDamage(enemyData.damageTaken);
+            if (healthSystem.GetHealth() <= 0)
             {
                 Die();
             }

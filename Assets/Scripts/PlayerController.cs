@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
+using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class PlayerController : PC
 {
@@ -23,9 +20,12 @@ public class PlayerController : PC
     [SerializeField] private float raycastMaxDistance = 0.1f;
     [SerializeField] private LayerMask raycastLayers;
 
+    public event Action OnItemCollected;
+
     public void CollectHealer()
     {
         collectedHealers += 1;
+        OnItemCollected?.Invoke();
     }
 
     public int GetCollectedHealers() => collectedHealers;
@@ -33,11 +33,13 @@ public class PlayerController : PC
     public void CollectAmmunition(int amountGranted)
     {
         collectedAmmunition += amountGranted;
+        OnItemCollected?.Invoke();
     }
 
     public void UseAmmunition(int amountUsed)
     {
         collectedAmmunition -= amountUsed;
+        OnItemCollected?.Invoke();
     }
 
     public int GetCollectedAmmunition() => collectedAmmunition;
@@ -45,6 +47,7 @@ public class PlayerController : PC
     public void CollectEnemy()
     {
         collectedEnemies += 1;
+        OnItemCollected?.Invoke();
     }
 
     public int GetCollectedEnemies() => collectedEnemies;
@@ -109,6 +112,7 @@ public class PlayerController : PC
 
     public override void Die()
     {
+        base.Die();
         Debug.Log("Game over"); //Replace with Game Over screen
     }
 
@@ -116,7 +120,7 @@ public class PlayerController : PC
     {
         if (collision.gameObject.CompareTag("Rock"))
         {
-            TakeDamage(10f);
+            healthSystem.TakeDamage(10f);
         }
     }
 
@@ -124,17 +128,13 @@ public class PlayerController : PC
     {
         if (other.gameObject.CompareTag("LevelEnd"))
         {
-            GameManager.Instance.SaveData(health, initialPosition);
+            GameManager.Instance.SaveData(healthSystem.GetHealth(), initialPosition);
         }
-    }
-
-    private void Awake()
-    {
-        health = GameManager.Instance.GetSavedHealth();
     }
 
     void Start()
     {
+        healthSystem.SetHealth(GameManager.Instance.GetSavedHealth());
         transform.localScale = characterSize;  
     }
 

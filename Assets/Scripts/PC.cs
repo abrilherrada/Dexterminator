@@ -2,37 +2,11 @@ using UnityEngine;
 
 public abstract class PC : Entity
 {
+    [SerializeField] public HealthSystem healthSystem;
+
     [SerializeField] private PCData data;
 
     [SerializeField] protected Animator animator;
-
-    protected float health;
-
-    public void GetHealed(float healingPoints)
-    {
-        if (health + healingPoints > data.maxHealth)
-        {
-            health = data.maxHealth;
-        }
-        else if (health + healingPoints <= data.maxHealth && health > 0)
-        {
-            health += healingPoints;
-        }
-    }
-
-    public void TakeDamage(float damagePoints)
-    {
-        health -= damagePoints;
-        animator.SetTrigger("isTakingDamage");
-
-        if (health - damagePoints < 0)
-        {
-            health = 0;
-            animator.SetInteger("health", 0);
-        }
-    }
-
-    public float GetHealth() => health;
 
     protected void Move(Vector3 direction)
     {
@@ -46,10 +20,24 @@ public abstract class PC : Entity
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, data.rotationSpeed * Time.deltaTime);
     }
 
-    public abstract void Die();
-
-    private void Start()
+    public virtual void Die()
     {
-        health = data.maxHealth;
+        healthSystem.Die();
+    }
+
+    protected virtual void OnPCDeathHandler()
+    {
+        Debug.Log("PC dead.");
+    }
+
+    private void OnDestroy()
+    {
+        healthSystem.OnPCDeath -= OnPCDeathHandler;
+    }
+
+    private void Awake()
+    {
+        healthSystem.Init();
+        healthSystem.OnPCDeath += OnPCDeathHandler;
     }
 }
