@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerController : PC
 {
+    public static PlayerController player;
+
     [SerializeField] private Rigidbody playerRigidbody;
     private KeyCode jumpKey = KeyCode.K;
     private KeyCode spinKey = KeyCode.J;
@@ -129,6 +131,19 @@ public class PlayerController : PC
         if (other.gameObject.CompareTag("LevelEnd"))
         {
             GameManager.Instance.SaveData(healthSystem.GetHealth(), initialPosition);
+        }
+    }
+
+    private void Awake()
+    {
+        if (player != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            player = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 

@@ -108,6 +108,7 @@ public class EnemyController : PC
         {
             animator.SetTrigger("isAttacking");
             player.healthSystem.TakeDamage(enemyData.damageDone);
+            Debug.Log($"player health: {player.healthSystem.GetHealth()}");
         }
 
         if (collision.gameObject.CompareTag("Projectile") && healthSystem.GetHealth() > 0)
