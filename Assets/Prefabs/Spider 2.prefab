@@ -2705,8 +2705,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.948225, y: 0.53029174, z: 0.8437576}
-  m_Center: {x: 0.013898969, y: 0.24329832, z: -0.01472187}
+  m_Size: {x: 0.948225, y: 0.53029174, z: 0.85149}
+  m_Center: {x: 0.013898969, y: 0.24329832, z: 0.0046100616}
 --- !u!114 &6137863078893158780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2727,6 +2727,7 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: f95871c36b6f5dc4b862c70f7965bee8, type: 2}
   postProcessingController: {fileID: 0}
   player: {fileID: 0}
+  enemyRigidbody: {fileID: 0}
   enemyType: 1
   target: {fileID: 0}
   rockToThrow: {fileID: 1774935105055644483, guid: ba170a0fb490ffa42a10fd502ccb1a4d,
@@ -2756,7 +2757,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 0263170bf7b6b6a44acf2890cdae5a1d, type: 2}
   animator: {fileID: 6137863078893158723}
-  invincibilityTime: 0
 --- !u!1 &6163831428369181135
 GameObject:
   m_ObjectHideFlags: 0

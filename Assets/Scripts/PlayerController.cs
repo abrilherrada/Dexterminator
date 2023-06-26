@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : PC
@@ -8,8 +9,10 @@ public class PlayerController : PC
     [SerializeField] private PostProcessingController postProcessingController;
 
     [SerializeField] private Rigidbody playerRigidbody;
-    private KeyCode jumpKey = KeyCode.K;
-    private KeyCode spinKey = KeyCode.J;
+    [SerializeField] private Renderer playerRenderer;
+
+    private KeyCode jumpKey = KeyCode.Space;
+    private KeyCode spinKey = KeyCode.Mouse1;
 
     private Vector3 characterSize = new Vector3(x: 0.35f, y: 0.35f, z: 0.35f);
     private Vector3 initialPosition = new Vector3(x: 0, y: 0, z: 0);
@@ -18,7 +21,15 @@ public class PlayerController : PC
     private int collectedEnemies = 0;
     private int collectedAmmunition = 10;
 
-    private float jumpingForce = 15f;
+    private bool isSpinning = false;
+
+    private float immunityTime = 2f;
+    private float immunityTimeLeft;
+
+    private float flickeringTime = 0.1f;
+    private float flickeringTimeLeft;
+
+    private float jumpingForce = 20f;
 
     [SerializeField] private Transform raycastOrigin;
     [SerializeField] private float raycastMaxDistance = 0.1f;
@@ -72,27 +83,33 @@ public class PlayerController : PC
     }
 
     //Movement
-    private void SetMovement()
+    private void SetMovement(Vector3 direction)
     {
-        var direction = new Vector3(x: Input.GetAxis("Horizontal"), y: 0, z: Input.GetAxis("Vertical"));
+        Rotate(GetRotation());
+
         if (direction != Vector3.zero)
         {
-            Move(direction);
-            Look(direction);
-
-            if (direction.x != 0)
-            {
-                animator.SetBool("isRotating", true);
-            }
-            else
-            {
-                animator.SetBool("isRotating", false);
-            }
+            Walk(direction);
+            animator.SetBool("isMoving", true);
         }
         else
         {
             animator.SetBool("isMoving", false);
         }
+    }
+
+    private Vector2 GetRotation()
+    {
+        var mouseX = Input.GetAxis("Mouse X");
+        var mouseY = Input.GetAxis("Mouse Y");
+        return new Vector2(mouseX, mouseY);
+    }
+
+    private Vector3 GetMovement()
+    {
+        var horizontal = Input.GetAxis("Horizontal");
+        var vertical = Input.GetAxis("Vertical");
+        return new Vector3(horizontal, 0, vertical).normalized;
     }
 
     //Abilities
@@ -110,7 +127,31 @@ public class PlayerController : PC
     {
         if (Input.GetKeyDown(spinKey))
         {
+            isSpinning = true;
             animator.SetTrigger("isSpinning");
+            StartCoroutine(WaitForSpinAnimation());
+        }
+    }
+
+    public bool GetIsSpinning() => isSpinning;
+
+    private IEnumerator WaitForSpinAnimation()
+    {
+        yield return new WaitForSeconds(1.5f);
+        isSpinning = false;
+    }
+
+    public void CanTakeDamage(float damagePoints)
+    {
+        if(immunityTimeLeft <= 0)
+        {
+            healthSystem.TakeDamage(damagePoints);
+            if(healthSystem.GetHealth() > 0)
+            {
+                immunityTimeLeft = immunityTime;
+                playerRenderer.enabled = false;
+                flickeringTimeLeft = flickeringTime;
+            }
         }
     }
 
@@ -124,7 +165,7 @@ public class PlayerController : PC
     {
         if (collision.gameObject.CompareTag("Rock"))
         {
-            healthSystem.TakeDamage(10f);
+            CanTakeDamage(10f);
             postProcessingController.UseDamagedEffect();
         }
     }
@@ -137,19 +178,6 @@ public class PlayerController : PC
         }
     }
 
-    private void Awake()
-    {
-        if (player != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            player = this;
-            DontDestroyOnLoad(gameObject);
-        }
-    }
-
     void Start()
     {
         healthSystem.SetHealth(GameManager.Instance.GetSavedHealth());
@@ -158,8 +186,24 @@ public class PlayerController : PC
 
     void Update()
     {
-        SetMovement();
+        SetMovement(GetMovement());
         Jump();
         Spin();
+
+        if (immunityTimeLeft > 0)
+        {
+            immunityTimeLeft -= Time.deltaTime;
+            flickeringTimeLeft -= Time.deltaTime;
+
+            if(flickeringTimeLeft <= 0 )
+            {
+                playerRenderer.enabled = !playerRenderer.enabled;
+                flickeringTimeLeft = flickeringTime;
+            }
+            if(immunityTimeLeft <= 0)
+            {
+                playerRenderer.enabled = true;
+            }
+        }
     }
 }

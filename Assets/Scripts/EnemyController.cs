@@ -14,6 +14,8 @@ public class EnemyController : PC
 
     [SerializeField] private PostProcessingController postProcessingController;
     [SerializeField] private PlayerController player;
+
+    [SerializeField] private Rigidbody enemyRigidbody;
     [SerializeField] private EnemyTypes enemyType;
     [SerializeField] private Transform target;
     [SerializeField] private Rock rockToThrow;
@@ -27,8 +29,9 @@ public class EnemyController : PC
     [SerializeField] private LayerMask raycastLayers;
 
     [SerializeField] private float distanceToStartChasing = 5f;
-    [SerializeField] private float distanceToStopChasing = 0;
     [SerializeField] private float distanceToStartThrowing = 4f;
+
+    private float pushForce = 2.5f;
 
     private void SetEnemyAction(EnemyTypes enemyType, Vector3 direction)
     {
@@ -63,7 +66,7 @@ public class EnemyController : PC
     {
         Look(direction);
 
-        if (distanceToStartChasing >= direction.magnitude && direction.magnitude > distanceToStopChasing && healthSystem.GetHealth() > 0 && IsTargetInSight() && direction != Vector3.zero)
+        if (distanceToStartChasing >= direction.magnitude && healthSystem.GetHealth() > 0 && IsTargetInSight() && direction != Vector3.zero)
         {
             Move(direction);
         }
@@ -103,14 +106,34 @@ public class EnemyController : PC
         Destroy(gameObject);
     }
 
+    private void GetPushed()
+    {
+        Vector3 forceVector = transform.forward * pushForce;
+        enemyRigidbody.AddForce(-forceVector, ForceMode.Impulse);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player") && collision.gameObject.TryGetComponent(out PlayerController player))
         {
-            animator.SetTrigger("isAttacking");
-            player.healthSystem.TakeDamage(enemyData.damageDone);
-            postProcessingController.UseDamagedEffect();
-            Debug.Log($"player health: {player.healthSystem.GetHealth()}");
+            if (healthSystem.GetHealth() > 0)
+            {
+                if(player.GetIsSpinning())
+                {
+                    healthSystem.TakeDamage(enemyData.damageTaken);
+                    GetPushed();
+                    if (healthSystem.GetHealth() <= 0)
+                    {
+                        Die();
+                    }
+                    return;
+                }
+
+                animator.SetTrigger("isAttacking");
+                player.CanTakeDamage(enemyData.damageDone);
+                postProcessingController.UseDamagedEffect();
+                Debug.Log($"player health: {player.healthSystem.GetHealth()}");
+            }
         }
 
         if (collision.gameObject.CompareTag("Projectile") && healthSystem.GetHealth() > 0)
