@@ -964,6 +964,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff72de82e7c741418ab29b682737ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 7831792388065484259}
+  shooterCooldown: {fileID: 0}
   shootKey: 108
   ballToShoot: {fileID: 1162596254243170345, guid: 45f4ce1902892724d9381502538866e4,
     type: 3}
@@ -1514,6 +1516,7 @@ GameObject:
   - component: {fileID: 7831792388065484258}
   - component: {fileID: 7831792388065484257}
   - component: {fileID: 7831792388065484259}
+  - component: {fileID: 7831792387347855984}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -1548,7 +1551,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6592559634176511950}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 91e4778cdfb185d4d9bfe81556dc4333, type: 3}
   m_Controller: {fileID: 9100000, guid: 0c5b7ffa0a986b24ea0ddfc7e545c76b, type: 2}
   m_CullingMode: 1
@@ -1602,13 +1605,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9e335717e3854348a316a416b8d120b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRigidbody: {fileID: 7831792388065484258}
+  entityName: 
+  id: 
+  healthSystem: {fileID: 7831792387347855984}
+  data: {fileID: 11400000, guid: dcaa67023b0c359438f0019f13584dcb, type: 2}
   animator: {fileID: 492729054574022414}
+  postProcessingController: {fileID: 0}
+  playerRigidbody: {fileID: 7831792388065484258}
   raycastOrigin: {fileID: 7831792387900295316}
   raycastMaxDistance: 0.1
   raycastLayers:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &7831792387347855984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6592559634176511950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e383b21ccb17b78489877365b75cf080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: dcaa67023b0c359438f0019f13584dcb, type: 2}
+  animator: {fileID: 492729054574022414}
+  invincibilityTime: 2
 --- !u!1 &6594074116559697026
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,8 @@ public class PlayerController : PC
 {
     public static PlayerController player;
 
+    [SerializeField] private PostProcessingController postProcessingController;
+
     [SerializeField] private Rigidbody playerRigidbody;
     private KeyCode jumpKey = KeyCode.K;
     private KeyCode spinKey = KeyCode.J;
@@ -123,6 +125,7 @@ public class PlayerController : PC
         if (collision.gameObject.CompareTag("Rock"))
         {
             healthSystem.TakeDamage(10f);
+            postProcessingController.UseDamagedEffect();
         }
     }
 

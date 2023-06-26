@@ -12,6 +12,7 @@ public class EnemyController : PC
 {
     [SerializeField] private EnemyData enemyData;
 
+    [SerializeField] private PostProcessingController postProcessingController;
     [SerializeField] private PlayerController player;
     [SerializeField] private EnemyTypes enemyType;
     [SerializeField] private Transform target;
@@ -108,6 +109,7 @@ public class EnemyController : PC
         {
             animator.SetTrigger("isAttacking");
             player.healthSystem.TakeDamage(enemyData.damageDone);
+            postProcessingController.UseDamagedEffect();
             Debug.Log($"player health: {player.healthSystem.GetHealth()}");
         }
 
