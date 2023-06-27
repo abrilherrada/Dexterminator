@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AmmunitionSpawner : MonoBehaviour
 {
-    [SerializeField] GameObject[] ammunitionToSpawn = new GameObject[15];
+    [SerializeField] GameObject[] ammunitionToSpawn = new GameObject[30];
     [SerializeField] List<Transform> spawnPositions;
 
     private Transform GetPosition()

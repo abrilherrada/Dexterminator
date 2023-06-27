@@ -10,7 +10,7 @@ public class BallShooter : MonoBehaviour
     [SerializeField] private Image shooterCooldown;
 
     //[SerializeField] private Rigidbody ballRigidbody;
-    [SerializeField] private KeyCode shootKey = KeyCode.L;
+    private KeyCode shootKey = KeyCode.Mouse0;
 
     [SerializeField] private Ball ballToShoot;
     [SerializeField] private Transform shootingPoint1;

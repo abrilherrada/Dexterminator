@@ -6,8 +6,6 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] private PCData data;
     [SerializeField] protected Animator animator;
 
-    [SerializeField] private float invincibilityTime;
-    private bool isInvincible;
     protected float health;
 
     public event Action OnPCDeath;
@@ -43,11 +41,6 @@ public class HealthSystem : MonoBehaviour
 
     public void TakeDamage(float damagePoints)
     {
-        if(isInvincible)
-        {
-            return;
-        }
-
         health -= damagePoints;
         animator.SetTrigger("isTakingDamage"); //sacar
 
@@ -63,7 +56,6 @@ public class HealthSystem : MonoBehaviour
 
     public virtual void Die()
     {
-        isInvincible = true;
         OnPCDeath?.Invoke();
     }
 }

@@ -52,6 +52,6 @@ public class UsernameValidator : MonoBehaviour
 
     private void OnEndEditHandler(string data)
     {
-        GameManager.Instance.SaveData(100, Vector3.zero);
+        GameManager.Instance.SaveData(100, 10, 0);
     }
 }

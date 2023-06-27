@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealerSpawner : MonoBehaviour
 {
-    [SerializeField] HealingController[] healerToSpawn = new HealingController[8];
+    [SerializeField] HealingController[] healerToSpawn = new HealingController[15];
     [SerializeField] List<Transform> spawnPositions;
 
     private Transform GetPosition()
