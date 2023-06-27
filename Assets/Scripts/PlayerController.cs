@@ -15,11 +15,12 @@ public class PlayerController : PC
     private KeyCode spinKey = KeyCode.Mouse1;
 
     private Vector3 characterSize = new Vector3(x: 0.35f, y: 0.35f, z: 0.35f);
-    private Vector3 initialPosition = new Vector3(x: 0, y: 0, z: 0);
+    private Vector3 firstInitialPosition = new Vector3(x: 0, y: 0.15f, z: 0);
+    public Vector3 secondInitialPosition = new Vector3(x: -1.75f, y: 0.15f, z: 0);
 
     private int collectedHealers = 0;
     private int collectedEnemies = 0;
-    private int collectedAmmunition = 10;
+    private int collectedAmmunition = 0;
 
     private bool isSpinning = false;
 
@@ -174,14 +175,32 @@ public class PlayerController : PC
     {
         if (other.gameObject.CompareTag("LevelEnd"))
         {
-            GameManager.Instance.SaveData(healthSystem.GetHealth(), initialPosition);
+            GameManager.Instance.SaveData(healthSystem.GetHealth(), collectedAmmunition, GameManager.Instance.GetScore());
+        }
+    }
+
+    private void Awake()
+    {
+        if (player != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            player = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 
     void Start()
     {
         healthSystem.SetHealth(GameManager.Instance.GetSavedHealth());
-        transform.localScale = characterSize;  
+        collectedAmmunition = GameManager.Instance.GetSavedAmmunition();
+
+        OnItemCollected?.Invoke();
+
+        transform.localScale = characterSize;
+        transform.position = firstInitialPosition;
     }
 
     void Update()

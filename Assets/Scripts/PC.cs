@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class PC : Entity
+public abstract class PC : MonoBehaviour
 {
     [SerializeField] public HealthSystem healthSystem;
 

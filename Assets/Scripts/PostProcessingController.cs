@@ -32,9 +32,6 @@ public class PostProcessingController : MonoBehaviour
 
     private void Awake()
     {
-        if (postProcessingVolume.sharedProfile.TryGet(out Vignette vignette))
-        {
-            vignette.intensity.value = 0f;
-        }
+        DisableVignette();
     }
 }

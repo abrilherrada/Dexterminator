@@ -8,12 +8,14 @@ using UnityEngine;
 public struct SavedCharacterData
 {
     public float health;
-    public Vector3 initialPosition;
+    public int ammunition;
+    public int score;
 
-    public SavedCharacterData(float playerHealth, Vector3 playerInitialPosition)
+    public SavedCharacterData(float playerHealth, int playerAmmunition, int playerScore)
     {
         health = playerHealth;
-        initialPosition = playerInitialPosition;
+        ammunition = playerAmmunition;
+        score = playerScore;
     }
 }
 
@@ -23,10 +25,10 @@ public struct SavedUser
     public string username;
     public SavedCharacterData characterData;
 
-    public SavedUser(string name, float currentHealth, Vector3 playerPosition)
+    public SavedUser(string name, float currentHealth, int currentAmmunition, int currentScore)
     {
         username = name;
-        characterData = new SavedCharacterData(currentHealth, playerPosition);
+        characterData = new SavedCharacterData(currentHealth, currentAmmunition, currentScore);
     }
 }
 
@@ -47,7 +49,7 @@ public class SavingManager : MonoBehaviour
         LoadExistingData();
     }
 
-    public void SaveData(string username, float currentHealth, Vector3 playerPosition)
+    public void SaveData(string username, float currentHealth, int currentAmmunition, int currentScore)
     {
         int existingUserIndex = savedUserArray.users.FindIndex(user => user.username == username);
 
@@ -56,14 +58,14 @@ public class SavingManager : MonoBehaviour
             SavedUser existingUser = savedUserArray.users[existingUserIndex];
             
             existingUser.characterData.health = currentHealth;
-            existingUser.characterData.initialPosition = playerPosition;
+            existingUser.characterData.ammunition = currentAmmunition;
+            existingUser.characterData.score = currentScore;
 
             savedUserArray.users[existingUserIndex] = existingUser;
         }
         else
         {
-            SavedUser newUser = new SavedUser(username, currentHealth, playerPosition);
-
+            SavedUser newUser = new SavedUser(username, currentHealth, currentAmmunition, currentScore);
             savedUserArray.users.Add(newUser);
         }
 
@@ -77,7 +79,6 @@ public class SavingManager : MonoBehaviour
         if(File.Exists(dataFilePath))
         {
             string jsonData = File.ReadAllText(dataFilePath);
-
             savedUserArray = JsonUtility.FromJson<SavedUserArray>(jsonData);
         }
         else
@@ -89,7 +90,6 @@ public class SavingManager : MonoBehaviour
     public SavedCharacterData LoadData(string username)
     {
         SavedUser foundUser = savedUserArray.users.Find(user => user.username == username);
-        
         return foundUser.characterData;
     }
 

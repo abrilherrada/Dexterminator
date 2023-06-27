@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager uiManager;
+
     [SerializeField] private HealthSystem healthSystem;
     [SerializeField] PlayerController playerController;
 
@@ -25,6 +27,16 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        if (uiManager != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            uiManager = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
         ingameUI.SetActive(true);
         pauseMenu.SetActive(false);
 

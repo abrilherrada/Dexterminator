@@ -2631,7 +2631,7 @@ GameObject:
   - component: {fileID: 6137863078893158722}
   - component: {fileID: 6137863078893158721}
   - component: {fileID: 6137863078893158780}
-  - component: {fileID: 6137863079246328613}
+  - component: {fileID: 2202436345302203274}
   m_Layer: 8
   m_Name: Spider 2
   m_TagString: Enemy
@@ -2721,7 +2721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityName: 
   id: 
-  healthSystem: {fileID: 6137863079246328613}
+  healthSystem: {fileID: 2202436345302203274}
   data: {fileID: 11400000, guid: 0263170bf7b6b6a44acf2890cdae5a1d, type: 2}
   animator: {fileID: 6137863078893158723}
   enemyData: {fileID: 11400000, guid: f95871c36b6f5dc4b862c70f7965bee8, type: 2}
@@ -2741,9 +2741,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 448
   distanceToStartChasing: 5
-  distanceToStopChasing: 1
   distanceToStartThrowing: 4
---- !u!114 &6137863079246328613
+--- !u!114 &2202436345302203274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -25,7 +25,7 @@ public class UIItemGenerator : MonoBehaviour
     private void OnUserButtonClick(string username)
     {
         GameManager.Instance.SetUsername(username);
-        GameManager.Instance.LoadAndSaveData();
+        GameManager.Instance.LoadData();
         
     }
 }
