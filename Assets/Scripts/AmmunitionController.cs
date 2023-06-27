@@ -6,8 +6,8 @@ public class AmmunitionController : MonoBehaviour
 {
     [SerializeField] GameObject ammunition;
 
-    private int ammunitionAmount = 2;
-    private int pointsForCollecting = 5;
+    private int ammunitionAmount = 4;
+    private int pointsForCollecting = 10;
 
     private void OnCollisionEnter(Collision collision)
     {

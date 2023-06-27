@@ -2631,6 +2631,7 @@ GameObject:
   - component: {fileID: 6137863078893158722}
   - component: {fileID: 6137863078893158721}
   - component: {fileID: 6137863078893158780}
+  - component: {fileID: 2202436345302203274}
   m_Layer: 8
   m_Name: Spider 2
   m_TagString: Enemy
@@ -2704,8 +2705,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.948225, y: 0.53029174, z: 0.8437576}
-  m_Center: {x: 0.013898969, y: 0.24329832, z: -0.01472187}
+  m_Size: {x: 0.948225, y: 0.53029174, z: 0.85149}
+  m_Center: {x: 0.013898969, y: 0.24329832, z: 0.0046100616}
 --- !u!114 &6137863078893158780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2718,9 +2719,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9ac55cd44b9314d9032ec828110b7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityName: 
+  id: 
+  healthSystem: {fileID: 2202436345302203274}
+  data: {fileID: 11400000, guid: 0263170bf7b6b6a44acf2890cdae5a1d, type: 2}
   animator: {fileID: 6137863078893158723}
+  enemyData: {fileID: 11400000, guid: f95871c36b6f5dc4b862c70f7965bee8, type: 2}
+  postProcessingController: {fileID: 0}
+  player: {fileID: 0}
+  enemyRigidbody: {fileID: 0}
   enemyType: 1
-  target: {fileID: 8038221428809585315, guid: 8e54007d58538154fa965729a65f45f5, type: 3}
+  target: {fileID: 0}
   rockToThrow: {fileID: 1774935105055644483, guid: ba170a0fb490ffa42a10fd502ccb1a4d,
     type: 3}
   throwingPoint: {fileID: 6137863078045905781}
@@ -2732,11 +2741,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 448
   distanceToStartChasing: 5
-  distanceToStopChasing: 1
   distanceToStartThrowing: 4
-  movementSpeed: 1
-  rotationSpeed: 60
-  health: 100
+--- !u!114 &2202436345302203274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6137863078893158783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e383b21ccb17b78489877365b75cf080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 0263170bf7b6b6a44acf2890cdae5a1d, type: 2}
+  animator: {fileID: 6137863078893158723}
 --- !u!1 &6163831428369181135
 GameObject:
   m_ObjectHideFlags: 0

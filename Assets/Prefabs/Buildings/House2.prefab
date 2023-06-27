@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 8129322228081716209}
   - component: {fileID: 7082694376987555290}
   - component: {fileID: 4805886225639826703}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &8129322228081716209
 Transform:
@@ -100,12 +100,12 @@ GameObject:
   - component: {fileID: 8981731638753711596}
   - component: {fileID: 3463626196552662530}
   - component: {fileID: 7502314635891493299}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Roof2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &3247620642197989018
 Transform:
@@ -197,12 +197,12 @@ GameObject:
   - component: {fileID: 3479650041837632292}
   - component: {fileID: 1962355499298463504}
   - component: {fileID: 1948320320572417500}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Door Knob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &3479650041837632292
 Transform:
@@ -280,12 +280,12 @@ GameObject:
   - component: {fileID: 5673527076135942836}
   - component: {fileID: 8410021540858790140}
   - component: {fileID: 3279342694798388944}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Window3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &5673527076135942836
 Transform:
@@ -371,7 +371,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &1465869179201689566
 Transform:
@@ -461,12 +461,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1465869179457237458}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: House2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &1465869179457237458
 Transform:
@@ -509,12 +509,12 @@ GameObject:
   - component: {fileID: 1465869179573243850}
   - component: {fileID: 1465869179573243849}
   - component: {fileID: 1465869179573243848}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &1465869179573243847
 Transform:
@@ -612,7 +612,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &1465869179579577763
 Transform:
@@ -709,7 +709,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &1465869179781786902
 Transform:
@@ -806,7 +806,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &1465869179792812736
 Transform:
@@ -898,12 +898,12 @@ GameObject:
   - component: {fileID: 1465869179845790721}
   - component: {fileID: 1465869179845790720}
   - component: {fileID: 1465869179845791231}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Room1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &1465869179845791230
 Transform:
@@ -1001,7 +1001,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &1465869179990020088
 Transform:
@@ -1098,7 +1098,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &1465869180239097256
 Transform:
@@ -1195,7 +1195,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &1465869181053454268
 Transform:
@@ -1287,12 +1287,12 @@ GameObject:
   - component: {fileID: 6846750237923536368}
   - component: {fileID: 6463213509670632845}
   - component: {fileID: 8956316584695457647}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Roof2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &6303756149363441629
 Transform:
@@ -1384,12 +1384,12 @@ GameObject:
   - component: {fileID: 8384772213505140728}
   - component: {fileID: 2942332468606536837}
   - component: {fileID: 1379868019422795484}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Window2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &8384772213505140728
 Transform:
@@ -1468,12 +1468,12 @@ GameObject:
   - component: {fileID: 2253929545990229304}
   - component: {fileID: 5988265381987990975}
   - component: {fileID: 7046503118566677708}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &2253929545990229304
 Transform:
@@ -1552,12 +1552,12 @@ GameObject:
   - component: {fileID: 325596378070742307}
   - component: {fileID: 1569563376935815490}
   - component: {fileID: 7827244108476654550}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Roof1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &4322678342496169261
 Transform:
@@ -1649,12 +1649,12 @@ GameObject:
   - component: {fileID: 9142692294913794023}
   - component: {fileID: 8808404703675726606}
   - component: {fileID: 5484393635718312503}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Door Lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &9142692294913794023
 Transform:
@@ -1732,12 +1732,12 @@ GameObject:
   - component: {fileID: 4819355991704659007}
   - component: {fileID: 3274578874926956321}
   - component: {fileID: 7601070250029086994}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Window1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &4819355991704659007
 Transform:
@@ -1816,12 +1816,12 @@ GameObject:
   - component: {fileID: 6801578546236013249}
   - component: {fileID: 6846482253209309078}
   - component: {fileID: 4173062238311191216}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &6801578546236013249
 Transform:
@@ -1899,12 +1899,12 @@ GameObject:
   - component: {fileID: 5314480839539463245}
   - component: {fileID: 1715271309973540271}
   - component: {fileID: 2058540909558592312}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &5314480839539463245
 Transform:
@@ -1982,12 +1982,12 @@ GameObject:
   - component: {fileID: 4187818295275463337}
   - component: {fileID: 3965057844123449132}
   - component: {fileID: 5160405536313763379}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &4187818295275463337
 Transform:
@@ -2065,12 +2065,12 @@ GameObject:
   - component: {fileID: 1328428103545046636}
   - component: {fileID: 2453309364293087040}
   - component: {fileID: 1523005565969945410}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &1328428103545046636
 Transform:
@@ -2149,12 +2149,12 @@ GameObject:
   - component: {fileID: 3913252089777240033}
   - component: {fileID: 7061677835222121507}
   - component: {fileID: 7310481316707252854}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Roof2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &5057107223314041827
 Transform:
@@ -2246,12 +2246,12 @@ GameObject:
   - component: {fileID: 8521701853127355610}
   - component: {fileID: 1526801625691753941}
   - component: {fileID: 5918238516680507249}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &8521701853127355610
 Transform:
@@ -2329,12 +2329,12 @@ GameObject:
   - component: {fileID: 8178026243831583800}
   - component: {fileID: 3281676515286058336}
   - component: {fileID: 4882739186971116462}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Door frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 23
   m_IsActive: 1
 --- !u!4 &8178026243831583800
 Transform:

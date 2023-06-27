@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] public bool isLevelFinished;
+    public bool isLevelFinished;
 
     private void Start()
     {
@@ -14,9 +12,10 @@ public class LevelManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && other.gameObject.TryGetComponent(out PlayerController player))
         {
             isLevelFinished = true;
+            player.transform.position = player.secondInitialPosition;
         }
     }
 

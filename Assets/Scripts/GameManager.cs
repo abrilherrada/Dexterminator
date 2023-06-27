@@ -7,8 +7,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SavingManager savingManager;
     public static GameManager Instance;
 
+    [SerializeField] private PlayerController player;
+
     private string username;
     private float health;
+    private int ammunition;
 
     private void Awake()
     {
@@ -44,9 +47,22 @@ public class GameManager : MonoBehaviour
 
     public float GetSavedHealth() => health;
 
+    public int GetSavedAmmunition() => ammunition;
+
     public void AddScore(int score)
     {
         scoreManager.Add(score);
+    }
+
+    public int GetScore()
+    {
+        var score = scoreManager.Get();
+        return score;
+    }
+
+    public void SetScore(int score)
+    {
+        scoreManager.Set(score);
     }
 
     public void TryToLoadLevel(string levelName)
@@ -54,15 +70,18 @@ public class GameManager : MonoBehaviour
         levelManager.LoadLevel(levelName);
     }
 
-    public void SaveData(float currentHealth, Vector3 playerPosition)
+    public void SaveData(float currentHealth, int currentAmmunition, int currentScore)
     {
-        savingManager.SaveData(username, currentHealth, playerPosition);
+        savingManager.SaveData(username, currentHealth, currentAmmunition, currentScore);
+        LoadData();
     }
 
-    public void LoadAndSaveData()
+    public void LoadData()
     {
         SavedCharacterData savedData = savingManager.LoadData(username);
         health = savedData.health;
-        SaveData(savedData.health, savedData.initialPosition);
+        ammunition = savedData.ammunition;
+        SetScore(savedData.score);
+        //SaveData(savedData.health, savedData.initialPosition);
     }
 }

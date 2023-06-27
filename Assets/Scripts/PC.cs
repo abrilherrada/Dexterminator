@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class PC : Entity
+public abstract class PC : MonoBehaviour
 {
     [SerializeField] public HealthSystem healthSystem;
 
@@ -18,6 +18,17 @@ public abstract class PC : Entity
     {
         Quaternion rotation = Quaternion.LookRotation(direction.normalized);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, data.rotationSpeed * Time.deltaTime);
+    }
+
+    protected void Rotate(Vector2 scrollDelta)
+    {
+        transform.Rotate(Vector3.up, scrollDelta.x * data.rotationSpeed * Time.deltaTime, Space.Self);
+    }
+
+    protected void Walk(Vector3 movementInput)
+    {
+        var characterTransform = transform;
+        characterTransform.position += (movementInput.z * transform.forward + movementInput.x * transform.right) * (data.movementSpeed * Time.deltaTime);
     }
 
     public virtual void Die()
